@@ -1,95 +1,75 @@
 ---
 import { Code } from 'astro:components';
 
-const code = `interface Developer {
-    name: string;
-    skills: string[];
-    interests: string[];
-};
+const code = `@dataclass
+class PlatformEngineer:
+    name: str
+    skills: List[str]
+    interests: List[str]
 
-interface TechStack {
-    devOps: string[];
-    backend: string[];
-   frontend: string[];
-};
+@dataclass
+class TechStack:
+    dev_ops: List[str]
+    backend: List[str]
+    frontend: List[str]
 
-type ContactType = 'github' | 'twitter' | 'linkedIn' | 'xing' | 'email';
-
-const techStack: TechStack = {
-    devOps: [
-        'GitLab',
-        'GitHub',
-        'Cloudflare',
-        'Docker'
+me = PlatformEngineer(
+    name='Ben Sutton',
+    skills=[
+        *tech_stack.dev_ops,
+        *tech_stack.backend,
+        *tech_stack.frontend
     ],
-    frontend: [
-        'Angular',
-        'JavaScript',
-        'TypeScript',
-        'TailwindCSS',
-        'PrimeNG',
-        'Astro',
-        'Ionic',
-        'Stencil',
-        'Capacitor',
-        'SCSS',
-        'Markdown',
-        'WordPress'
-    ],
-    backend: [
-        'Supabase',
-        'Node.js',
-        'Bun',
-        'Deno',
-        'PostgreSQL',
-        'MySQL',
-        'S3 Storage',
-        'Resend'
-    ]
-};
-
-// Developer profile
-const me: Developer = {
-    name: 'Dejan Vi.',
-    skills: [
-        ...techStack.devOps,
-        ...techStack.backend,
-        ...techStack.frontend
-    ],
-    interests: [
-        'Open Source',
-        'Security',
-        'Privacy',
-        'Performance',
+    interests=[
+        'DevOps',
+        'SwiftUI',
         'Self-Hosting',
         'Networking'
     ]
-};
+)
 
-// Contact function
-const contact = (type: ContactType): string => {
-    switch (type) {
+tech_stack = TechStack(
+    dev_ops=[
+        'Kubernetes',
+        'Terraform', 
+        'Github',
+        'Datadog',
+        'Azure',
+        'Grafana'
+    ],
+    frontend=[
+        'Astro',
+        'Markdown',
+        'SwiftUI'
+    ],
+    backend=[
+        'Swift',
+        'Python',
+        'PostgreSQL',
+        'Supabase'
+    ]
+)
+
+ContactType = Literal['github', 'linkedIn', 'email']
+
+def contact(contact_type: ContactType) -> str:
+    """Get contact information based on type."""
+    match contact_type:
         case 'github':
-            return 'https://github.com/devidevio';
-        case 'twitter':
-            return 'https://x.com/devidev_io';
+            return 'https://github.com/Zeus-3x'
         case 'linkedIn':
-            return 'https://www.linkedin.com/in/dejan-vi';
-        case 'xing':
-            return 'https://www.xing.com/profile/Dejan_Vintonjiv';
+            return 'https://www.linkedin.com/in/ben.sutton96'
         case 'email':
-            return 'hi@devidev.io';
-        default:
-            return 'Send fax.';
-    }
-};
+            return 'ben@sutt.sh'
+        case _:
+            return 'Send fax.'
 
 `;
 ---
 
 <Code
     code={code}
-    lang="js"
+    lang="py"
     wrap={true}
 />
 
